@@ -114,3 +114,22 @@ INSERT INTO reviews (Number, Description, Rating, reviewID, courierID) VALUES ('
 INSERT INTO users (Name, Age, letterID, packageID, reviewID) VALUES ('Ярослав Арамов', '20', '1', '1', '1');
 INSERT INTO cities (Cities_Name,Countries_Name) VALUES ('Волгоград','Россия');
 
+
+ALTER TABLE cities ADD COLUMN new_col varchar(100) NOT NULL ;
+ALTER TABLE cities ALTER COLUMN new_col SET DEFAULT "something";
+ALTER TABLE cities ADD INDEX new_index (Cities_Name);
+ALTER TABLE cities RENAME INDEX new_index TO very_new_index;
+ALTER TABLE cities DROP INDEX very_new_index;
+ALTER TABLE cities DROP COLUMN new_col;
+ALTER TABLE cities COMMENT 'комент';
+ALTER TABLE packages CHANGE COLUMN Comments Comments CHAR(100) NOT NULL ;
+ALTER TABLE users DROP COLUMN Name,DROP PRIMARY KEY;
+ALTER TABLE users ADD COLUMN NewName VARCHAR(45) NOT NULL AFTER reviewID, ADD PRIMARY KEY (`NewName`);
+
+RENAME TABLE users TO current_users;
+RENAME TABLE rating TO points;
+
+drop table cities,comments_to_package,countries,couriers,departure_information,
+letters,packages,post_offices,points,reviews,current_users;
+
+drop database mihaylov_database;
